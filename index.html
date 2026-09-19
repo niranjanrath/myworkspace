@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>MyWorkspace</title>
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="A local-first, Markdown-powered personal workspace and documentation tool.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231868db'/%3E%3Cpath d='M11 8h7l5 5v11H11z' fill='none' stroke='white' stroke-width='2' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <script>
+    /* Apply the saved theme before first paint to avoid a light/dark flash. */
+    (function () {
+      try {
+        var s = JSON.parse(localStorage.getItem('mw:v1:settings') || '{}');
+        var t = s.theme || 'system';
+        var dark = t === 'dark' || (t === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="stylesheet" href="css/variables.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/markdown.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <div class="app">
+    <header id="header" class="header"></header>
+    <div class="app-body">
+      <div id="scrim" class="scrim"></div>
+      <aside id="sidebar" class="sidebar" aria-label="Sidebar"></aside>
+      <main id="main" class="main"></main>
+    </div>
+  </div>
+  <div id="toasts" class="toasts" aria-live="polite"></div>
+  <div id="modal-root"></div>
+  <noscript><p style="padding:24px">MyWorkspace needs JavaScript to run.</p></noscript>
+
+  <!-- Vendored libraries (no network needed) -->
+  <script src="js/vendor/marked.umd.js"></script>
+  <script src="js/vendor/purify.min.js"></script>
+  <script src="js/vendor/jszip.min.js"></script>
+
+  <!-- App (plain scripts on a shared WS namespace so it also runs from file://) -->
+  <script src="js/utils.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/storageService.js"></script>
+  <script src="js/markdownService.js"></script>
+  <script src="js/pageService.js"></script>
+  <script src="js/searchService.js"></script>
+  <script src="js/router.js"></script>
+  <script src="js/components/header.js"></script>
+  <script src="js/components/sidebar.js"></script>
+  <script src="js/components/pageList.js"></script>
+  <script src="js/components/dashboard.js"></script>
+  <script src="js/components/pageViewer.js"></script>
+  <script src="js/components/pageEditor.js"></script>
+  <script src="js/components/profile.js"></script>
+  <script src="js/components/settings.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

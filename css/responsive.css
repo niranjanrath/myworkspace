@@ -1,0 +1,100 @@
+/* Wide → narrow. Breakpoints: 1100 (hide TOC), 900 (drawer), 700 (phone). */
+
+@media (max-width: 1100px) {
+  .page-toc { display: none; }
+  .profile-layout { grid-template-columns: 1fr; }
+  .profile-card { position: static; order: -1; }
+}
+
+@media (max-width: 899px) {
+  .sidebar {
+    position: fixed; z-index: 70; left: 0; top: 0; bottom: 0;
+    width: min(320px, 86vw); height: 100vh; height: 100dvh;
+    padding-top: 10px; background: var(--surface);
+    transform: translateX(-102%); transition: transform 0.2s ease-out, visibility 0s linear 0.2s;
+    box-shadow: none; visibility: hidden;
+  }
+  body.sidebar-open .sidebar { transform: none; box-shadow: var(--shadow-lg); visibility: visible; transition: transform 0.2s ease-out, visibility 0s; }
+  .scrim { display: block; position: fixed; inset: 0; z-index: 65; background: rgba(10, 18, 30, 0.45); opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+  body.sidebar-open .scrim { opacity: 1; pointer-events: auto; }
+  body.sidebar-open { overflow: hidden; }
+  .sb-drawer-close { display: grid; margin-left: auto; }
+  .sb-top { display: flex; align-items: center; }
+  .sb-top .sb-profile { flex: 1; min-width: 0; }
+
+  .view { padding: 22px 20px 72px; }
+  .page-layout { padding: 20px 20px 96px; }
+  .quick-actions { grid-template-columns: repeat(3, 1fr); }
+  .dash-grid { grid-template-columns: 1fr; }
+  .search { margin-left: 8px; }
+}
+
+@media (max-width: 699px) {
+  :root { --header-h: 52px; }
+  .header { padding: 0 8px; gap: 4px; }
+  .brand { font-size: 15px; }
+  .header-hide-mobile { display: none !important; }
+  .search { position: static; margin: 0 0 0 auto; max-width: none; flex: none; }
+  .search-toggle { display: inline-grid; }
+  .search .search-box { display: none; }
+  .search.open { position: absolute; left: 0; right: 0; top: 0; height: var(--header-h); padding: 8px; background: var(--surface); z-index: 5; margin: 0; }
+  .search.open .search-box { display: flex; height: 100%; }
+  .search.open .search-toggle { display: none; }
+  .search.open .search-panel { top: calc(100% + 2px); left: 8px; right: 8px; }
+  .header-right { margin-left: 0; }
+
+  .welcome { padding: 20px; }
+  .welcome h1 { font-size: 21px; }
+  .welcome-art { display: none; }
+  .quick-actions { grid-template-columns: 1fr; }
+  .action-tile { flex-direction: row; justify-content: flex-start; min-height: 60px; padding: 12px 16px; }
+
+  .view-head h1 { font-size: 21px; }
+  .page-title { font-size: 26px; }
+  .page-actions .desktop-only { display: none; }
+  .page-row-tags { display: none; }
+
+  .mobile-actions {
+    display: flex; position: fixed; z-index: 30; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom));
+    padding: 6px; gap: 4px; justify-content: space-around;
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-md);
+  }
+  .mobile-actions .btn { flex: 1; border: 0; background: transparent; height: 42px; }
+  .mobile-actions .btn:hover { background: var(--surface-hover); }
+  .mobile-actions .btn-primary { background: var(--primary); }
+
+  .form-row { grid-template-columns: 1fr; gap: 4px; }
+  .form-row > label { padding-top: 0; }
+  .form-hint { grid-column: 1; }
+
+  .editor-bar { padding: 8px 10px; gap: 6px; }
+  .editor-bar h1 { font-size: 16px; }
+  .editor-status.hide-mobile { display: none; }
+  .editor-meta { padding: 8px 10px; }
+  .editor-meta .field-inline { width: 100%; }
+  .editor-meta .field-inline .select { flex: 1; }
+  .editor-toolbar { padding: 4px 6px; }
+  .editor-panes { grid-template-columns: 1fr; }
+  .editor .pane + .pane { border-left: 0; }
+  .editor[data-view="split"] .pane-preview { display: none; }
+  .editor[data-view="preview"] .pane-edit { display: none; }
+  .editor .pane-label { display: none; }
+  .editor-textarea { padding: 14px 14px 40px; font-size: 14px; }
+  .preview-scroll { padding: 14px 16px 40px; }
+
+  .setting-row { align-items: flex-start; }
+  .toasts { bottom: 84px; }
+}
+
+/* Desktop: "preview" view behaves like split */
+@media (min-width: 700px) {
+  .editor[data-view="preview"] .editor-panes { grid-template-columns: 1fr 1fr; }
+}
+
+@media print {
+  .header, .sidebar, .scrim, .page-actions, .mobile-actions, .page-toc, .toasts, .crumbs, .code-copy { display: none !important; }
+  body, .main { background: #fff; color: #000; }
+  .page-layout { padding: 0; max-width: none; }
+  .page-col { max-width: none; }
+  .markdown-body pre { white-space: pre-wrap; }
+}
