@@ -29,7 +29,6 @@
     }
 
     const avatar = profile.photo ? '<img src="' + esc(profile.photo) + '" alt="">' : esc(WS.util.initials(profile.name));
-    const dark = document.documentElement.dataset.theme === 'dark';
 
     el.innerHTML =
       '<div class="sb-top">' +
@@ -38,6 +37,7 @@
           '<span><div class="name">' + esc(profile.name || 'Your profile') + '</div>' +
           '<div class="sub">' + (profile.name ? 'View profile' : 'Add your details') + '</div></span>' +
         '</a>' +
+        '<a class="icon-btn' + (pat === '/settings' ? ' on' : '') + '" href="#/settings" title="Settings" aria-label="Settings">' + icon('settings', 19) + '</a>' +
         '<button class="icon-btn sb-drawer-close" type="button" data-action="close" aria-label="Close navigation">' + icon('x', 20) + '</button>' +
       '</div>' +
       '<div class="sb-scroll thin-scroll">' +
@@ -54,12 +54,7 @@
           : '<p style="padding:6px 10px;color:var(--text-3);font-size:13px">No spaces yet.</p>') +
       '</nav>' +
       '</div>' +
-      '<div class="sb-footer">' +
-        navItem('#/settings', 'settings', 'Settings', pat === '/settings') +
-        '<button class="nav-item" type="button" data-action="theme">' + icon(dark ? 'sun' : 'moon', 18) + '<span class="label">' + (dark ? 'Light theme' : 'Dark theme') + '</span></button>' +
-        '<button class="nav-item" type="button" data-action="export-all">' + icon('download', 18) + '<span class="label">Export all (Markdown)</span></button>' +
-        '<button class="nav-item" type="button" data-action="about">' + icon('info', 18) + '<span class="label">About</span></button>' +
-      '</div>';
+      '';
   }
 
   function isOpen() {
@@ -83,9 +78,6 @@
           const a = btn.getAttribute('data-action');
           if (a === 'close') close();
           else if (a === 'add-space') { close(); WS.actions.newSpace(); }
-          else if (a === 'theme') WS.theme.toggle();
-          else if (a === 'export-all') { close(); WS.actions.exportAll(); }
-          else if (a === 'about') { close(); WS.actions.about(); }
           return;
         }
         if (e.target.closest('a')) close();

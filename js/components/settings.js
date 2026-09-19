@@ -46,6 +46,11 @@
             '<strong>' + WS.util.formatBytes(WS.storage.usageBytes()) + '</strong></div>' +
         '</section>' +
 
+        '<section class="card settings-block"><h2>About</h2>' +
+          '<div class="setting-row"><div><div class="label">MyWorkspace</div><div class="desc">A personal, Markdown-first workspace that runs entirely in your browser: no account, no server, no tracking. ' +
+            pages + (pages === 1 ? ' page' : ' pages') + ' in ' + spaces + (spaces === 1 ? ' space' : ' spaces') + '. Press <span class="kbd">/</span> to search from anywhere.</div></div></div>' +
+        '</section>' +
+
         '<section class="card settings-block"><h2>Reset</h2>' +
           '<div class="setting-row"><div><div class="label">Reset workspace</div><div class="desc">Erase all pages, spaces, profile and settings from this browser and restore the sample content.</div></div>' +
             '<button class="btn btn-danger-outline" type="button" data-act="reset">' + icon('trash', 16) + 'Reset workspace</button></div>' +
