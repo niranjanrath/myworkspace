@@ -40,6 +40,7 @@
         '</a>' +
         '<button class="icon-btn sb-drawer-close" type="button" data-action="close" aria-label="Close navigation">' + icon('x', 20) + '</button>' +
       '</div>' +
+      '<div class="sb-scroll thin-scroll">' +
       '<nav aria-label="Main">' +
         navItem('#/home', 'home', 'Home', pat === '/home') +
         navItem('#/pages', 'file', 'All Pages', pat === '/pages') +
@@ -52,7 +53,7 @@
         (spaces.length ? spaces.map((s) => navItem('#/space/' + encodeURIComponent(s.id), 'folder', s.name, activeSpace === s.id, WS.pages.countInSpace(s.id))).join('')
           : '<p style="padding:6px 10px;color:var(--text-3);font-size:13px">No spaces yet.</p>') +
       '</nav>' +
-      '<div class="sb-spacer"></div>' +
+      '</div>' +
       '<div class="sb-footer">' +
         navItem('#/settings', 'settings', 'Settings', pat === '/settings') +
         '<button class="nav-item" type="button" data-action="theme">' + icon(dark ? 'sun' : 'moon', 18) + '<span class="label">' + (dark ? 'Light theme' : 'Dark theme') + '</span></button>' +

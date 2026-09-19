@@ -54,7 +54,7 @@ svg.icon { flex: none; display: block; }
   width: var(--sidebar-w); flex: none;
   position: sticky; top: var(--header-h);
   height: calc(100vh - var(--header-h)); height: calc(100dvh - var(--header-h));
-  overflow-y: auto; overscroll-behavior: contain;
+  overflow: hidden;
   background: var(--surface-2);
   border-right: 1px solid var(--border);
   display: flex; flex-direction: column;
@@ -173,8 +173,18 @@ svg.icon { flex: none; display: block; }
 .sb-profile .name { font-weight: 650; font-size: 14.5px; line-height: 1.2; }
 .sb-profile .sub { font-size: 12.5px; color: var(--link); }
 .sb-section { display: flex; align-items: center; justify-content: space-between; padding: 14px 10px 4px; color: var(--text-2); font-size: 12.5px; font-weight: 650; }
-.sb-spacer { flex: 1; min-height: 12px; }
-.sb-footer { border-top: 1px solid var(--border); padding-top: 8px; margin-top: 8px; }
-.sb-drawer-close { display: none; }
+.sb-top { display: flex; align-items: center; flex: none; }
+.sb-top .sb-profile { flex: 1; min-width: 0; }
+/* Only the middle (nav + spaces) scrolls; profile stays on top and footer actions stay pinned. */
+.sb-scroll { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; }
+.sb-footer { flex: none; border-top: 1px solid var(--border); padding-top: 8px; margin-top: 8px; }
+.sidebar .sb-drawer-close { display: none; }
+
+/* Slim scrollbars that stay invisible until you hover the area. */
+.thin-scroll { scrollbar-width: thin; scrollbar-color: transparent transparent; }
+.thin-scroll:hover, .thin-scroll:focus-within { scrollbar-color: var(--border-strong) transparent; }
+.thin-scroll::-webkit-scrollbar { width: 8px; }
+.thin-scroll::-webkit-scrollbar-thumb { background: transparent; border-radius: 4px; }
+.thin-scroll:hover::-webkit-scrollbar-thumb { background: var(--border-strong); }
 
 .view-head h1 { display: flex; align-items: center; gap: 10px; }

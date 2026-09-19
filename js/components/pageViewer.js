@@ -41,7 +41,7 @@
             : '<div class="markdown-body" id="md">' + rendered.html + '</div>') +
         '</article>' +
         (rendered.toc.length >= 2
-          ? '<aside class="page-toc" aria-label="On this page"><div class="toc-title">On this page</div><nav class="toc">' +
+          ? '<aside class="page-toc thin-scroll" aria-label="On this page"><div class="toc-title">On this page</div><nav class="toc">' +
             rendered.toc.map((t) => '<a class="l' + t.level + '" href="#' + esc(t.id) + '" data-toc="' + esc(t.id) + '">' + esc(t.text) + '</a>').join('') + '</nav></aside>'
           : '') +
       '</div>' +

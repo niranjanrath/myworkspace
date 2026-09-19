@@ -18,9 +18,7 @@
   .scrim { display: block; position: fixed; inset: 0; z-index: 65; background: rgba(10, 18, 30, 0.45); opacity: 0; pointer-events: none; transition: opacity 0.2s; }
   body.sidebar-open .scrim { opacity: 1; pointer-events: auto; }
   body.sidebar-open { overflow: hidden; }
-  .sb-drawer-close { display: grid; margin-left: auto; }
-  .sb-top { display: flex; align-items: center; }
-  .sb-top .sb-profile { flex: 1; min-width: 0; }
+  .sidebar .sb-drawer-close { display: grid; margin-left: auto; }
 
   .view { padding: 22px 20px 72px; }
   .page-layout { padding: 20px 20px 96px; }
