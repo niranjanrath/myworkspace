@@ -1,7 +1,7 @@
 # MyWorkspace
 
 A local-first, Confluence-like personal workspace. Plain HTML, CSS and vanilla JavaScript. No backend, no login.
-All data lives in your browser's LocalStorage.
+All data lives in your browser's IndexedDB (existing LocalStorage data is migrated automatically; LocalStorage is only a fallback).
 
 ## Run it
 Open `index.html` in a browser (works from disk), or serve the folder: `python3 -m http.server` and visit http://localhost:8000.

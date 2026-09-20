@@ -42,8 +42,11 @@
         '</section>' +
 
         '<section class="card settings-block"><h2>Storage</h2>' +
-          '<div class="setting-row"><div><div class="label">Used in this browser</div><div class="desc">Browsers usually allow around 5 MB of LocalStorage per site.</div></div>' +
-            '<strong>' + WS.util.formatBytes(WS.storage.usageBytes()) + '</strong></div>' +
+          '<div class="setting-row"><div><div class="label">Used in this browser</div><div class="desc" id="storage-desc">Checking…</div></div>' +
+            '<strong id="storage-usage">…</strong></div>' +
+          (WS.storage.legacyExists()
+            ? '<div class="setting-row"><div><div class="label">Old LocalStorage copy</div><div class="desc">Your data was copied to IndexedDB. The old copy is still here as a safety net. Remove it once you are happy everything is intact.</div></div>' +
+              '<button class="btn btn-danger-outline" type="button" data-act="remove-legacy">Remove old copy</button></div>' : '') +
         '</section>' +
 
         '<section class="card settings-block"><h2>About</h2>' +
@@ -75,6 +78,20 @@
       else if (a === 'import') WS.actions.importMarkdown();
       else if (a === 'export-all') WS.actions.exportAll();
       else if (a === 'reset') WS.actions.resetWorkspace();
+      else if (a === 'remove-legacy') {
+        WS.ui.confirm({ title: 'Remove old copy', message: 'Delete the old LocalStorage copy of your workspace? The IndexedDB copy is not affected.', confirmText: 'Remove', danger: true })
+          .then((ok) => ok && WS.storage.removeLegacy().then(() => { WS.ui.toast('Old copy removed'); WS.router.refresh(); }));
+      }
+    });
+
+    WS.storage.estimate().then((e) => {
+      const usage = main.querySelector('#storage-usage');
+      const desc = main.querySelector('#storage-desc');
+      if (!usage || !document.body.contains(usage)) return;
+      usage.textContent = WS.util.formatBytes(e.usage) + (e.quota ? ' of ' + WS.util.formatBytes(e.quota) : '');
+      desc.textContent = e.engine === 'indexeddb'
+        ? 'Stored in IndexedDB, which has far more room than LocalStorage. ' + (e.persisted ? 'The browser has marked it as persistent.' : 'The browser may clear it if the device runs very low on space, so keep a backup.')
+        : 'IndexedDB is unavailable here, so LocalStorage is used (about 5 MB limit). Keep a backup.';
     });
   };
 })();

@@ -11,8 +11,9 @@
     /* Apply the saved theme before first paint to avoid a light/dark flash. */
     (function () {
       try {
-        var s = JSON.parse(localStorage.getItem('mw:v1:settings') || '{}');
-        var t = s.theme || 'system';
+        var t = localStorage.getItem('mw:theme');
+        if (!t) { var s = JSON.parse(localStorage.getItem('mw:v1:settings') || '{}'); t = s.theme; }
+        t = t || 'system';
         var dark = t === 'dark' || (t === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
         document.documentElement.dataset.theme = dark ? 'dark' : 'light';
       } catch (e) {}

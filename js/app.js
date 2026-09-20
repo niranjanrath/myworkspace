@@ -276,6 +276,17 @@
     r.start();
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
-  else boot();
+  function start() {
+    WS.storage.init()
+      .catch((err) => { console.error('Storage init failed', err); })
+      .then((info) => {
+        boot();
+        if (info && info.migrated) {
+          WS.ui.toast('Your workspace was upgraded to IndexedDB. Nothing was lost.', 'info', 6000);
+        }
+      });
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+  else start();
 })();
